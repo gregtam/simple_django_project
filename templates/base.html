@@ -1,0 +1,81 @@
+<style type="text/tailwindcss">
+  @layer components {
+    .nav-links > li {
+      @apply bg-green-300 hover:bg-green-400 rounded-lg p-2 mx-2 my-3;
+    }
+
+    .links > li > a {
+      @apply inline-block bg-green-200 hover:bg-red-200 rounded-lg p-2 my-2;
+    }
+
+    .login {
+      @apply inline-block bg-green-400 hover:bg-red-200 rounded-lg p-2 my-2;
+    }
+
+    .register {
+      @apply inline-block bg-gray-400 hover:bg-red-200 rounded-lg p-2 my-2;
+    }
+
+    button {
+      @apply bg-blue-200 hover:bg-red-200 rounded-lg p-2 m-2;
+    }
+
+    nav > ul > li, .logout-button {
+      @apply hover:bg-blue-300 py-2 px-4 rounded-xl m-0
+    }
+
+    table {
+      @apply mb-10
+    }
+
+    tr, th {
+      @apply border-2
+    }
+
+    h1 {
+      @apply text-3xl
+    }
+  }
+</style>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/htmx.org@2.0.3"></script>
+</head>
+
+<html>
+  <head>
+    <nav class='flex justify-between bg-slate-100 font-semibold'>
+      <ul class='flex gap-2 mx-4 my-2'>
+        <li><a href="{% url 'home' %}">Home</a></li>
+        {% if user.is_authenticated%}
+          <li><a href="{% url 'data' %}">Data</a></li>
+        {% endif %}
+        <li><a href="{% url 'about' %}">About</a></li>
+        <li><a href="{% url 'contact' %}">Contact</a></li>
+      </ul>
+
+      {% if user.is_authenticated %}
+        <ul class='flex gap-2 m-2'>
+          <form method="POST" action="{% url 'logout' %}" class='m-0'>
+            {% csrf_token %}
+            <button class='logout-button'>Logout</button>
+          </form>
+        </ul>
+      {% else %}
+        <ul class='flex gap-2 m-2'>
+          <li><a href="{% url 'login' %}">Login</a></li>
+          <li class='bg-orange-400 hover:bg-orange-500 py-2 px-4 rounded-xl text-white'><a href="{% url 'users:register' %}">Register</a></li>
+        </ul>
+      {% endif %}
+    </nav>
+  </head>
+
+  <body class='bg-slate-50'>
+    <div class='w-[90%] max-w-[1024px] mx-auto mt-5'>
+      {% block content %}
+      {% endblock content %}
+    </div>
+  </body>
+</html>
