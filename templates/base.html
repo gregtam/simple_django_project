@@ -45,7 +45,7 @@
 </head>
 
 <html>
-  <head>
+  <body class='bg-slate-50' hx-boost='true'>
     <nav class='flex justify-between bg-slate-100 font-semibold'>
       <ul class='flex gap-2 mx-4 my-2'>
         <li><a href="{% url 'home' %}">Home</a></li>
@@ -54,6 +54,7 @@
         {% endif %}
         <li><a href="{% url 'about' %}">About</a></li>
         <li><a href="{% url 'contact' %}">Contact</a></li>
+        <li><a href="{% url 'celery_task' %}">Celery Task</a></li>
       </ul>
 
       {% if user.is_authenticated %}
@@ -70,9 +71,7 @@
         </ul>
       {% endif %}
     </nav>
-  </head>
 
-  <body class='bg-slate-50'>
     <div class='w-[90%] max-w-[1024px] mx-auto mt-5'>
       {% block content %}
       {% endblock content %}

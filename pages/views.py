@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from transactions.models import TransactionsModel
+from .tasks import add
 
 # Create your views here.
 def home(request):
@@ -15,3 +16,13 @@ def about(request):
 
 def contact(request):
     return render(request, 'pages/contact.html', {})
+
+def celery_task(request):
+    return render(request, 'pages/slow_load_data.html')
+
+def transactions_table(request):
+    """Partial view that renders the transactions table"""
+    task = add.delay(8, 8)
+    task.get(timeout=600)  # Wait for the task to complete
+    transactions = TransactionsModel.objects.filter(user_uuid=request.user.uuid)
+    return render(request, 'pages/partials/transactions_table.html', {'transactions': transactions})
