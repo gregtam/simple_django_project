@@ -1,8 +1,9 @@
 from datetime import datetime
+import time
 
 from django.shortcuts import render
 from transactions.models import TransactionsModel
-from .tasks import add
+from .tasks import simple_sleep_task
 
 # Create your views here.
 def home(request):
@@ -24,7 +25,7 @@ def slow_load_test_transactions(request):
 
 def transactions_table(request):
     """Partial view that renders the transactions table"""
-    task = add.delay(8, 8)
+    task = simple_sleep_task.delay()
     task.get(timeout=600)  # Wait for the task to complete
     transactions = TransactionsModel.objects.filter(user_uuid=request.user.uuid)
 
