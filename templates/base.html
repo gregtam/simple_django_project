@@ -54,7 +54,7 @@
         {% endif %}
         <li><a href="{% url 'about' %}">About</a></li>
         <li><a href="{% url 'contact' %}">Contact</a></li>
-        <li><a href="{% url 'celery_task' %}">Celery Task</a></li>
+        <li><a href="{% url 'slow_load_test_transactions' %}">Slow Load Test Transactions</a></li>
       </ul>
 
       {% if user.is_authenticated %}

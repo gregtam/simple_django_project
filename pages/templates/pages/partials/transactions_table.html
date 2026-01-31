@@ -1,0 +1,20 @@
+<table class='mt-8 mx-auto overflow-hidden w-3/4 rounded-3xl'>
+  <thead class='bg-green-400'>
+    <tr class='border-0'>
+      <th class="p-3 border-0">Amount</th>
+      <th class="p-3 border-0">Timstamp</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for transaction in transactions %}
+      <tr class='border-0 even:bg-green-50 odd:bg-green-100'>
+        <td class="p-3">{{ transaction.amount }}</td>
+        <td class="p-3">{{ transaction.timestamp }}</td>
+      </tr>
+    {% empty %}
+      <tr class='border-0'>
+        <td colspan="2" class="p-2 text-center">No transactions found.</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>

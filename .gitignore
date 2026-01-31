@@ -1,3 +1,5 @@
 *.sqlite3
 .env
 *.pyc
+*/migrations/*
+.ipynb_checkpoints

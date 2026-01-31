@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <style>
+    /* Hide skeleton by default */
+    .htmx-indicator {
+        display: none;
+    }
+
+    /* Show skeleton only when a request is active */
+    .htmx-request .htmx-indicator,
+    .htmx-request.htmx-indicator {
+        display: block;
+    }
+
+    /* While request is active, hide the data table */
+    .htmx-request ~ #data-table {
+      display: none;
+    }
+  </style>
+  <h1>Slow Load Test Transactions Page</h1>
+
+  <button hx-get="{% url 'transactions_table' %}" hx-trigger="click" hx-target="#data-table" hx-swap="innerHTML" hx-indicator="#skeleton">
+    Load Transactions Data
+  </button>
+
+  <!-- Loading skeleton (hidden until request, shown via hx-indicator) -->
+  <div id="skeleton" class="htmx-indicator mt-8 mx-auto w-3/4">
+    <table class='mt-8 mx-auto overflow-hidden w-full rounded-3xl'>
+      <thead class='bg-blue-400'>
+        <tr class='border-0'>
+          <th class="p-3 border-0">Amount</th>
+          <th class="p-3 border-0">Timestamp</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class='border-0 even:bg-blue-50 odd:bg-blue-100'>
+          <td class="p-3"><div class="h-4 bg-gray-300 rounded animate-pulse w-20"></div></td>
+          <td class="p-3"><div class="h-4 bg-gray-300 rounded animate-pulse w-32"></div></td>
+        </tr>
+        <tr class='border-0 even:bg-blue-50 odd:bg-blue-100'>
+          <td class="p-3"><div class="h-4 bg-gray-300 rounded animate-pulse w-20"></div></td>
+          <td class="p-3"><div class="h-4 bg-gray-300 rounded animate-pulse w-32"></div></td>
+        </tr>
+        <tr class='border-0 even:bg-blue-50 odd:bg-blue-100'>
+          <td class="p-3"><div class="h-4 bg-gray-300 rounded animate-pulse w-20"></div></td>
+          <td class="p-3"><div class="h-4 bg-gray-300 rounded animate-pulse w-32"></div></td>
+        </tr>
+        <tr class='border-0 even:bg-blue-50 odd:bg-blue-100'>
+          <td class="p-3"><div class="h-4 bg-gray-300 rounded animate-pulse w-20"></div></td>
+          <td class="p-3"><div class="h-4 bg-gray-300 rounded animate-pulse w-32"></div></td>
+        </tr>
+        <tr class='border-0 even:bg-blue-50 odd:bg-blue-100'>
+          <td class="p-3"><div class="h-4 bg-gray-300 rounded animate-pulse w-20"></div></td>
+          <td class="p-3"><div class="h-4 bg-gray-300 rounded animate-pulse w-32"></div></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Data table (empty until loaded) -->
+  <div id="data-table" class="mt-6">
+  </div>
+{% endblock content %}
