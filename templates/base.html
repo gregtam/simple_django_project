@@ -49,12 +49,12 @@
     <nav class='flex justify-between bg-slate-100 font-semibold'>
       <ul class='flex gap-2 mx-4 my-2'>
         <li><a href="{% url 'home' %}">Home</a></li>
-        {% if user.is_authenticated%}
-          <li><a href="{% url 'data' %}">Data</a></li>
-        {% endif %}
         <li><a href="{% url 'about' %}">About</a></li>
         <li><a href="{% url 'contact' %}">Contact</a></li>
-        <li><a href="{% url 'slow_load_test_transactions' %}">Slow Load Test Transactions</a></li>
+        {% if user.is_authenticated%}
+          <li><a href="{% url 'data' %}">Data</a></li>
+          <li><a href="{% url 'slow_load_test_transactions' %}">Slow Load Test Transactions</a></li>
+        {% endif %}
       </ul>
 
       {% if user.is_authenticated %}
