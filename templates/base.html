@@ -54,6 +54,7 @@
         {% if user.is_authenticated%}
           <li><a href="{% url 'data' %}">Data</a></li>
           <li><a href="{% url 'slow_load_test_transactions' %}">Slow Load Test Transactions</a></li>
+          <li><a href="{% url 'load_plaid_transactions' %}">Load Plaid Transactions</a></li>
         {% endif %}
       </ul>
 

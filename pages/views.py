@@ -23,6 +23,9 @@ def contact(request):
 def slow_load_test_transactions(request):
     return render(request, 'pages/slow_load_test_transactions.html')
 
+def load_plaid_test_transactions(request):
+    return render(request, 'pages/load_plaid_test_transactions.html')
+
 def transactions_table(request):
     """Partial view that renders the transactions table"""
     task = simple_sleep_task.delay()
@@ -30,3 +33,12 @@ def transactions_table(request):
     transactions = TransactionsModel.objects.filter(user_uuid=request.user.uuid)
 
     return render(request, 'pages/partials/transactions_table.html', {'transactions': transactions})
+
+def plaid_transactions_table(request):
+    """Partial view that triggers the Plaid sandbox test and renders the transactions table"""
+    from .tasks import run_plaid_sandbox_test
+    # Trigger the sandbox task and wait for the result
+    transactions = run_plaid_sandbox_test.delay().get(timeout=600)
+
+    return render(request, 'pages/partials/plaid_transactions_table.html',
+                  {'transactions': transactions})
