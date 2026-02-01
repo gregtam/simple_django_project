@@ -1,0 +1,32 @@
+<table class='mt-8 mx-auto overflow-hidden w-3/4 rounded-3xl'>
+  <thead class='bg-blue-400'>
+    <tr class='border-0'>
+      <th class="p-3 border-0">User UUID</th>
+      <th class="p-3 border-0">Account ID</th>
+      <th class="p-3 border-0">Transaction ID</th>
+      <th class="p-3 border-0">Date</th>
+      <th class="p-3 border-0">Amount</th>
+      <th class="p-3 border-0">Transaction Name</th>
+      <th class="p-3 border-0">Account Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for transaction in transactions %}
+      <tr class='border-0 even:bg-blue-50 odd:bg-blue-100'>
+        <td class="p-3">{{ transaction.user_uuid }}</td>
+        <td class="p-3">{{ transaction.account_id }}</td>
+        <td class="p-3">{{ transaction.transaction_id }}</td>
+        <td class="p-3">{{ transaction.date }}</td>
+        <td class="p-3">{{ transaction.amount }}</td>
+        <td class="p-3">{{ transaction.transaction_name }}</td>
+        <td class="p-3">{{ transaction.account_name }}</td>
+      </tr>
+    {% empty %}
+      <tr class='border-0'>
+        <td colspan="7" class="p-2 text-center">No transactions found.</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<h1>Total Transactions: {{ transactions|length }}</h1>

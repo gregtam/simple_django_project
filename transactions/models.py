@@ -21,3 +21,6 @@ class PlaidTransactionsModel(models.Model):
     amount = models.DecimalField(max_digits=10, decimal_places=2)
     transaction_name = models.CharField(max_length=255)
     account_name = models.CharField(max_length=255)
+
+    class Meta:
+        unique_together = [['user_uuid', 'transaction_id']]

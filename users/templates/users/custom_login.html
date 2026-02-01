@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load socialaccount %}
+
+{% block content %}
+<div class="login-container">
+    <h2>Login</h2>
+
+    <!-- AllAuth Social Login -->
+    <div class="allauth-section">
+        <h3>Login with Social Account</h3>
+        {% providers_media_js %}
+        <div class="socialaccount_providers">
+            {% if socialaccount_providers %}
+                {% for provider in socialaccount_providers %}
+                    <a title="{{ provider.name }}" class="socialaccount_provider {{ provider.id }}" href="{% provider_login_url provider.id %}">
+                        {{ provider.name }}
+                    </a>
+                {% endfor %}
+            {% else %}
+                <p>No social login providers configured.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <hr>
+    <p>Or</p>
+    <hr>
+
+    <!-- Traditional Form Login -->
+    <div class="form-section">
+        <h3>Login with Username and Password</h3>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Login</button>
+        </form>
+    </div>
+</div>
+{% endblock content %}
