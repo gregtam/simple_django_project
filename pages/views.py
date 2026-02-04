@@ -28,8 +28,16 @@ def show_plaid_test_transactions(request):
 
     all_transactions = PlaidTransactionsModel.objects.filter(user_uuid=request.user.uuid).order_by('-date')
     paginator = Paginator(all_transactions, 15)  # 15 transactions per page
+
+    # Gets the page number from the request GET parameters
     page_number = request.GET.get('page', 1)
+
+    # Gets the transactions for the requested page
     transactions = paginator.get_page(page_number)
+
+    # Return partial only for pagination HTMX requests, full page otherwise
+    if request.headers.get('HX-Request') and request.headers.get('Is-Partial') == 'true':
+        return render(request, 'pages/partials/plaid_transactions_partial.html', {'transactions': transactions})
 
     return render(request, 'pages/show_plaid_test_transactions.html', {'transactions': transactions})
 

@@ -21,7 +21,7 @@ app.conf.beat_schedule = {
     'sync-plaid-transactions-daily': {
         'task': 'pages.tasks.sync_plaid_transactions_for_all_users',
         # 'schedule': crontab(hour=2, minute=0),  # Run daily at 2 AM
-        'schedule': 30.0,  # Run every 5 minutes (in seconds)
+        'schedule': 30.0,  # Run every 30 seconds
         # Alternative: 'schedule': 3600.0,  # Run every hour (in seconds)
     },
 }

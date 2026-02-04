@@ -1,0 +1,47 @@
+<!-- Pagination Controls -->
+<div class="mt-8 flex justify-center gap-4">
+  {% if transactions.has_previous %}
+    <a hx-get="?page=1" hx-target="#transactions-container" hx-swap="innerHTML" hx-push-url="true" hx-headers='{"Is-Partial":"true"}' class="px-3 py-2 bg-blue-400 text-white rounded hover:bg-blue-500 cursor-pointer">First</a>
+    <a hx-get="?page={{ transactions.previous_page_number }}" hx-target="#transactions-container" hx-swap="innerHTML" hx-push-url="true" hx-headers='{"Is-Partial":"true"}' class="px-3 py-2 bg-blue-400 text-white rounded hover:bg-blue-500 cursor-pointer">Prev</a>
+  {% else %}
+    <a class="px-3 py-2 bg-gray-300 text-gray-500 rounded cursor-not-allowed">First</a>
+    <a class="px-3 py-2 bg-gray-300 text-gray-500 rounded cursor-not-allowed">Prev</a>
+  {% endif %}
+
+  <span class="px-3 py-2">Page {{ transactions.number }} of {{ transactions.paginator.num_pages }}</span>
+
+  {% if transactions.has_next %}
+    <a hx-get="?page={{ transactions.next_page_number }}" hx-target="#transactions-container" hx-swap="innerHTML" hx-push-url="true" hx-headers='{"Is-Partial":"true"}' class="px-3 py-2 bg-blue-400 text-white rounded hover:bg-blue-500 cursor-pointer">Next</a>
+    <a hx-get="?page={{ transactions.paginator.num_pages }}" hx-target="#transactions-container" hx-swap="innerHTML" hx-push-url="true" hx-headers='{"Is-Partial":"true"}' class="px-3 py-2 bg-blue-400 text-white rounded hover:bg-blue-500 cursor-pointer">Last</a>
+  {% else %}
+    <a class="px-3 py-2 bg-gray-300 text-gray-500 rounded cursor-not-allowed">Next</a>
+    <a class="px-3 py-2 bg-gray-300 text-gray-500 rounded cursor-not-allowed">Last</a>
+  {% endif %}
+</div>
+
+<table class='my-8 mx-auto overflow-hidden w-3/4 rounded-3xl bg-black'>
+  <thead class='bg-blue-400'>
+    <tr class='border-0'>
+      <th class="p-3 border-0">User UUID</th>
+      <th class="p-3 border-0">Date</th>
+      <th class="p-3 border-0">Amount</th>
+      <th class="p-3 border-0">Transaction Name</th>
+      <th class="p-3 border-0">Account Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for transaction in transactions %}
+      <tr class='border-0 even:bg-blue-50 odd:bg-blue-100'>
+        <td class="p-3">{{ transaction.user_uuid }}</td>
+        <td class="p-3">{{ transaction.date }}</td>
+        <td class="p-3">{{ transaction.amount }}</td>
+        <td class="p-3">{{ transaction.transaction_name }}</td>
+        <td class="p-3">{{ transaction.account_name }}</td>
+      </tr>
+    {% empty %}
+      <tr class='border-0'>
+        <td colspan="5" class="p-2 text-center">No transactions found.</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
