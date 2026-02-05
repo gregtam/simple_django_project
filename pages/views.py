@@ -36,11 +36,3 @@ def show_plaid_test_transactions(request):
     transactions = paginator.get_page(page_number)
 
     return render(request, 'pages/show_plaid_test_transactions.html', {'transactions': transactions})
-
-def transactions_table(request):
-    """Partial view that renders the transactions table"""
-    task = simple_sleep_task.delay()
-    task.get(timeout=600)  # Wait for the task to complete
-    transactions = TransactionsModel.objects.filter(user_uuid=request.user.uuid)
-
-    return render(request, 'pages/partials/transactions_table.html', {'transactions': transactions})

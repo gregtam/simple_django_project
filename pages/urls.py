@@ -7,6 +7,5 @@ urlpatterns = [
     path('data', views.data, name='data'),
     path('contact', views.contact, name='contact'),
     path('slow_load_test_transactions', views.slow_load_test_transactions, name='slow_load_test_transactions'),
-    path('transactions_table', views.transactions_table, name='transactions_table'),
     path('show_plaid_test_transactions', views.show_plaid_test_transactions, name='show_plaid_test_transactions'),
 ]

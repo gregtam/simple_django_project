@@ -20,7 +20,7 @@
   </style>
   <h1>Slow Load Test Transactions Page</h1>
 
-  <button hx-get="{% url 'transactions_table' %}" hx-trigger="click" hx-target="#data-table" hx-swap="innerHTML" hx-indicator="#skeleton">
+  <button hx-get="{% url 'transactions:transactions_table' %}" hx-trigger="click" hx-target="#data-table" hx-swap="innerHTML" hx-indicator="#skeleton">
     Load Transactions Data
   </button>
 
