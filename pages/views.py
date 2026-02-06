@@ -4,7 +4,6 @@ import time
 from django.core.paginator import Paginator
 from django.shortcuts import render
 from transactions.models import TransactionsModel, PlaidTransactionsModel
-from .tasks import simple_sleep_task
 
 # Create your views here.
 def home(request):

@@ -1,6 +1,7 @@
 from django.core.paginator import Paginator
 from django.shortcuts import render
-from .models import PlaidTransactionsModel
+from .models import TransactionsModel, PlaidTransactionsModel
+from .tasks import simple_sleep_task
 
 
 # Create your views here.
